@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="noOver" lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/css/style.css">
+    <!--ICONE ABA-->
+    <link rel="shortcut icon" href="src/img/icon-moove.png" type="image/x-icon">
+    <script defer src="src/js/main.js"></script>
+    <script type="text/javascript" src="funcoes.js"></script>
+    <title>Moove - Login</title>
+</head>
+
+<body style="overflow-y: hidden;" onload="verificar_autenticacao3()">
+    <!-- INICIO DO HEADER-->
+    <header id="blur2">
+        <div class="container">
+            <nav>
+                <img src="src/img/icon-moove2.png" onclick="window.location.href='index.html'" alt="" class="icon-header">
+                <ul class="middle">
+                    <li>
+                        <a href="index.html"><img src="src/img/home.png" class="icon"></a>
+                        <a class="texto" href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="sobre.html"><img src="src/img/search.png" class="icon"></a>
+                        <a class="texto" href="sobre.html">Sobre</a>
+                    </li>
+                    <li>
+                        <a href="servicos.html"><img src="src/img/repair.png" class="icon"></a>
+                        <a class="texto" href="servicos.html">Serviços</a>
+                    </li>
+                    <li>
+                        <a href="avaliacao.html"><img src="src/img/conversacao.png" class="icon"></a>
+                        <a class="texto" href="avaliacao2.html">Avaliação</a>
+                    </li>
+                    <li>
+                        <a href="login.html" class="login texto">Login</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>  
+    </header>
+    <!-- FIM DO HEADER-->
+
+    <!-- INICIO DO MAIN-->
+    <main>
+        
+        <!-- <div class="lado" id="blur1"></div>
+        <form id="form_login" onsubmit="return entrar()" method="POST">
+            <div class="login-page" id="blur">
+                <div class="box">
+                    <h1 class="elemento1">LOGIN</h1><br><br>
+                    <p class="text">Usuário:</p>
+                    <input class="elemento2" name="login" required><br>
+                    <p class="text">Senha:</p>
+                    <input class="elemento3" name="senha" type="password" required><br>
+                    <a onclick="openForm()"><u class="esqueci">Esqueci a senha</u></a><br><br>
+                    <button class="elemento4" type="submit">Entrar</button><br><br>
+                    <p><b class="textoCadastro">Não tem uma conta?</b> <a href="cadastro.html"><u
+                                class="cadastro">Cadastre-se</u></a></p>
+                </div>
+            </div>
+        </form>
+
+        <div class="form-popup" id="myForm">
+            <form class="form-container">
+                <h1>Esqueci a Senha</h1>
+
+                <label for="email">Usuário:</label>
+                <input type="text" class="" placeholder="Coloque seu Usuário" name="user" required>
+
+                <label for="psw">E-mail:</label>
+                <input type="text" placeholder="Coloque o seu E-mail" name="email" required>
+
+                <button type="submit" class="btn">Recuperar Senha</button>
+                <button type="submit" class="btn cancel" onclick="closeForm()">Fechar</button>
+            </form>
+        </div> -->
+        <div class="imgHome">
+            <div class="efeitoBgHome">
+                <div class="textoHome">
+                    <b style="font-size: xx-large;">MOOVE</b> <br /><br /> Melhorando ainda mais a experiência do
+                    usuário<br />
+                    <br>
+                    <a class="botaoHome" href="sobre.html">
+                        Saiba mais
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--FOOTER-->
+        <div class="rodape">
+            <div>
+                <img src="src/img/icon-moove2.png" alt="">
+            </div>
+            <div class="lista-rodape">
+                <h2>Contato</h2>
+                <br>
+                <img src="src/img/email (1).png"> suporte@movesense.atlasian.net <br><br>
+                <img src="src/img/instagram.png"> @moovebr <br><br>
+                <img src="src/img/place.png"> Rua Haddock Lobo, 595 <br>
+                São Paulo, SP
+            </div>
+            <div class="lista-rodape2">
+                <h2 >Empresa</h2>
+                <br>
+                <a href="sobre.html"> Sobre </a><br>
+                <a href="servicos.html"> Serviços</a> <br>
+                <a href="avaliacao.html"> Avaliações</a> 
+            </div>
+
+            <div class="lista-rodape2">
+                <h2>Login</h2>
+                <br>
+                <a href="login.html">Dashboard </a><br>
+            </div>
+
+            <div id="copyright">
+                <img src="src/img/copyright (1).png" id="img-copyright"> Moove 2020
+            </div>
+        </div>
+    <!-- FIM FOOTER -->
+    
+    </main>
+    <!-- FIM DO MAIN-->
+           
+
+</body>
+
+</html>
+
+<script>
+    function entrar() {
+        var formulario = new URLSearchParams(new FormData(form_login));
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            body: formulario
+        }).then(resposta => {
+
+            if (resposta.ok) {
+
+                resposta.json().then(json => {
+
+                    sessionStorage.login_usuario_meuapp = json.nomeTrans;
+                    sessionStorage.nome_usuario_meuapp = json.cnpjTrans;
+
+                    window.location.href = 'dashboard.html';
+                });
+
+            } else {
+
+                console.log('Erro de login!');
+
+                response.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+        });
+
+        return false;
+    }
+</script>

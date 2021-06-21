@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="shortcut icon" href="src/img/icon-moove.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <title> Dashboard </title>
+</head>
+
+<body class="body-avaliacao" onload="onLoadAdicionarLinha()">
+
+    <!-- INICIO DO HEADER-->
+    <header>
+        <div class="container">
+            <nav>
+                <img src="src/img/icon-moove2.png" onclick="window.location.href='index.html'" alt=""
+                    class="icon-header">
+                <div class="dash-header">
+                    <a href="logout.html"><img src="src/img/sair.png">
+                        <h1>Sair</h1>
+                    </a>
+            </nav>
+        </div>
+        </div>
+    </header>
+    <!-- FIM DO HEADER-->
+
+
+    <!-- DASHBOARD -->
+    <div class="dash-geral">
+        <div class="dash-menuesquerda">
+            <div class="dash-nomemenu">
+
+                <h1 id="nometrans">Nome <br> Transportadora</h1>
+            </div>
+            <div class="dash-iconsmenu">
+                <div class="iconsmenu">
+                    <a href="dashboard.html"><img src="src/img/casa.png">
+                        <h1> Início </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="perfil.html"><img src="src/img/do-utilizador.png">
+                        <h1> Perfil </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="cadastrosDash.html"><img src="src/img/informacoes.png">
+                        <h1> Cadastros </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="monitoramento.html"> <img src="src/img/chart.png">
+                        <h1> Monitoramento </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="avaliacaoDash.html"> <img src="src/img/estrela.png">
+                        <h1 class="destaque-dash"> Avaliações </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="https://movesense.atlassian.net/servicedesk/customer/portal/3"> <img src="src/img/botao-de-duvidas.png">
+                        <h1> Ajuda </h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="dash-menudireita">
+            <h2> AVALIAÇÕES </h2>
+            <div id="topicosLinhas">
+                <h2 id="h2-avaliacoes"> TÓPICOS </h2>
+                <div class="topicos-avaliacoes">
+                    <div onclick="desaparecer(), recebeTipo('infraPontos')" class="topicos">
+                        <p> Infraestrutura dos Pontos </p>
+                    </div>
+                    <div onclick="desaparecer(), recebeTipo('cumpHora')" class="topicos">
+                        <p> Cumprimento do horário </p>
+                    </div>
+                    <div onclick="desaparecer(), recebeTipo('seg')" class="topicos">
+                        <p> Segurança </p>
+                    </div>
+                    <div onclick="desaparecer(), recebeTipo('infraOnibus')" class="topicos">
+                        <p> Infraestrutura dos ônibus </p>
+                    </div>
+                    <div onclick="desaparecer(), recebeTipo('condFunc')" class="topicos">
+                        <p> Conduta dos funcionários </p>
+                    </div>
+                    <div onclick="desaparecer(), recebeTipo('outra')" class="topicos">
+                        <p> Outros </p>
+                    </div>
+                </div>
+
+                <h2 id="h2-avaliacoes"> LINHAS </h2>
+                <div id="div_linhas" class="linhas-avaliacoes">
+                </div>
+            </div>
+
+            <div id="avaliacoes" style="display: none;" class="notificacoes-dash-completa">
+                <div class="dash-notificacoes">
+                    <div id="div_avaliacoes" class="recebe-avaliacao"></div>
+                </div>
+                <div class="botao-voltar-dash"><a href="avaliacaoDash.html">Voltar</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- FIM DA DASHBOARD-->
+
+</html>
+<script>
+
+    let id = sessionStorage.idTrans
+    function desaparecer() {
+        topicosLinhas.style.display = 'none'
+        avaliacoes.style.display = 'block'
+    }
+
+    function onLoadAdicionarLinha() {
+
+        fetch(`/avaliacao/inserirLinhas/${id}`, {
+            method: "GET"
+        }).then(resposta => {
+
+            if (resposta.ok) {
+
+                resposta.json().then(json => {
+
+                    // for (n = 0; n < json.length; n++) {
+                    //     div_avaliacoes.innerHTML += `${n + 1} - ${json[n].dataAvaliacao} ${json[n].comentarioAvaliacao} <br><br>`;
+                    //     console.log(json.comentarioAvaliacao)
+                    // }
+                    if (id == json[0].idTrans) {
+                        for (n = 0; n < json.length; n++) {
+                            div_linhas.innerHTML += `<div onclick="desaparecer(), recebeLinha(${json[n].numLinha})" class="linhas">
+                                        <p> Linha ${json[n].numLinha} </p>
+                                    </div>`
+                            // console.log(`Sessão ${n}:` + json[n])
+                        }
+                    }
+
+                })
+
+            } else {
+
+                alert("Nenhuma avaliação encontrada")
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                    console.log(resposta);
+                });
+            }
+        });
+
+    }
+
+    function recebeTipo(tipo) {
+        fetch(`/avaliacao/receberAvaliacoesTipo/${id}/${tipo}`, {
+            method: "GET"
+        }).then(resposta => {
+
+            if (resposta.ok) {
+
+                resposta.json().then(json => {
+
+                    for (n = 0; n < json.length; n++) {
+                        div_avaliacoes.innerHTML += `${n + 1} - [${json[n].dataAvaliacao} - ${json[n].horaAvaliacao}] (Linha ${json[n].numLinha}) ${json[n].comentarioAvaliacao} <br><br>`;
+                        console.log(json.comentarioAvaliacao)
+                    }
+
+                })
+
+            } else {
+
+                // alert("Nenhuma avaliação encontrada")
+                div_avaliacoes.innerHTML = `Nenhuma avaliação`
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                    console.log(resposta);
+                });
+            }
+        });
+    }
+
+    function recebeLinha(linha) {
+        fetch(`/avaliacao/receberAvaliacoesLinha/${id}/${linha}`, {
+            method: "GET"
+        }).then(resposta => {
+
+            if (resposta.ok) {
+
+                resposta.json().then(json => {
+
+                    for (n = 0; n < json.length; n++) {
+                        div_avaliacoes.innerHTML += `${n + 1} - [${json[n].dataAvaliacao} - ${json[n].horaAvaliacao}] (Linha ${json[n].numLinha}) ${json[n].comentarioAvaliacao} <br><br>`;
+                        console.log(json.comentarioAvaliacao)
+                    }
+
+                })
+
+            } else {
+
+                // alert("Nenhuma avaliação encontrada")
+                div_avaliacoes.innerHTML = `Nenhuma avaliação`
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                    console.log(resposta);
+                });
+            }
+        });
+    }
+</script>

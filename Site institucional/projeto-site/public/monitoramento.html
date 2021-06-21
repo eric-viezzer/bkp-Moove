@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="shortcut icon" href="src/img/icon-moove.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <title> Dashboard </title>
+    <script async="" src="./Pie Chart_files/analytics.js"></script>
+    <script src="./Pie Chart_files/Chart.min.js"></script>
+    <script src="./Pie Chart_files/utils.js"></script>
+    <style type="text/css">
+        /* Chart.js */
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: .99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            animation: chartjs-render-animation 1ms
+        }
+
+        .chartjs-size-monitor,
+        .chartjs-size-monitor-expand,
+        .chartjs-size-monitor-shrink {
+            position: absolute;
+            direction: ltr;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: -1
+        }
+
+        .chartjs-size-monitor-expand>div {
+            position: absolute;
+            width: 1000000px;
+            height: 1000000px;
+            left: 0;
+            top: 0
+        }
+
+        .chartjs-size-monitor-shrink>div {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: 0;
+            top: 0
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- INICIO DO HEADER-->
+    <header>
+        <div class="container">
+            <nav>
+                <img src="src/img/icon-moove2.png" onclick="window.location.href='index.html'" alt=""
+                    class="icon-header">
+                <div class="dash-header">
+                    <a href="logout.html"><img src="src/img/sair.png">
+                        <h1>Sair</h1>
+                    </a>
+            </nav>
+        </div>
+        </div>
+    </header>
+    <!-- FIM DO HEADER-->
+
+
+    <!-- DASHBOARD -->
+    <div class="dash-geral">
+        <div class="dash-menuesquerda">
+            <div class="dash-nomemenu">
+
+                <h1 id="nometrans">Nome <br> Transportadora</h1>
+            </div>
+            <div class="dash-iconsmenu">
+                <div class="iconsmenu">
+                    <a href="dashboard.html"><img src="src/img/casa.png">
+                        <h1> Início </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="perfil.html"><img src="src/img/do-utilizador.png">
+                        <h1> Perfil </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="cadastrosDash.html"><img src="src/img/informacoes.png">
+                        <h1> Cadastros </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="monitoramento.html"> <img src="src/img/chart.png">
+                        <h1 class="destaque-dash"> Monitoramento </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="avaliacaoDash.html"> <img src="src/img/estrela.png">
+                        <h1> Avaliações </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="https://movesense.atlassian.net/servicedesk/customer/portal/3"> <img src="src/img/botao-de-duvidas.png">
+                        <h1> Ajuda </h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="dash-menudireita">
+            <h2>MONITORAMENTO</h2>
+           <br>
+            <div class="dash-graficos">
+                <div class="dash-monitoramento">
+                    <div style="width:80%; margin-top: 5%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="canvas_grafico" style="display: block; width: 1013px; height: 506px;" width="1013" height="506" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- FIM DA DASHBOARD-->
+
+</html>
+
+<!-- biblioteca dos icones -->
+<script src="https://kit.fontawesome.com/f3846a3688.js"></script>
+<!-- js dados grafico -->
+<script src="src/js/monitoramento.js"></script>
+<!-- importando a biblioteca dos graficos -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+// window.onload = obterDadosGrafico;
+
+//     verificar_autenticacao();
+
+//     // verificar_autenticacao();
+
+//     // neste JSON tem que ser 'labels', 'datasets' etc, 
+//     // porque é o padrão do Chart.js
+var dados = {
+    labels: [],
+    datasets: [{
+        yAxisID: 'y-quantidade',
+        label: 'Quantidade',
+        borderColor: window.chartColors.red,
+        backgroundColor: window.chartColors.red,
+        fill: false,
+        data: []
+    }]
+};
+
+
+//     // só mexer se quiser alterar o tempo de atualização
+//     // ou se souber o que está fazendo!
+    var momento;
+
+function atualizarGrafico() {
+
+    fetch('/leituras/tempo-real', {
+        cache: 'no-store'
+    }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (novoRegistro) {
+                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                if (momento != novoRegistro.momento_grafico) {
+                    // tirando e colocando valores no gráfico
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.datasets[0].data.push(novoRegistro.leitura);
+                    dados.labels.push(novoRegistro.momento_grafico); // incluir um novo momento
+                    dados.datasets[0].data.shift(); // apagar o primeiro de temperatura
+                    window.grafico_linha.update();
+                    momento = novoRegistro.momento_grafico;
+                }
+                setTimeout(atualizarGrafico, 5000);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+            setTimeout(atualizarGrafico, 5000);
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+
+}
+
+// atualizarGrafico();
+
+//     // altere aqui as configurações do gráfico
+//     // (tamanhos, cores, textos, etc)
+function configurarGrafico() {
+    var configuracoes = {
+        responsive: true,
+        animation: {
+            duration: 500
+        },
+        hoverMode: 'index',
+        stacked: false,
+        title: {
+            display: true,
+            text: 'Quantidade de pessoas entrando'
+        },
+        scales: {
+            yAxes: [{
+                display: true,
+                id: 'y-quantidade',
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Quantidade de pessoas'
+                }
+            }],
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Horário'
+                }
+            }]
+        }
+    };
+
+    return configuracoes;
+}
+
+//     // altere aqui como os dados serão exibidos
+//     // e como são recuperados do BackEnd
+function obterDadosGrafico() {
+
+    fetch('/leituras/ultimas', {
+        cache: 'no-store'
+    }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                resposta.reverse();
+
+                for (i = 0; i < resposta.length; i++) {
+                    var registro = resposta[i];
+
+                    // aqui, após 'registro.' use os nomes 
+                    // dos atributos que vem no JSON 
+                    // que gerou na consulta ao banco de dados
+
+                    dados.labels.push(registro.momento_grafico);
+
+                    dados.datasets[0].data.push(registro.leitura);
+                }
+                console.log(JSON.stringify(dados));
+
+
+                plotarGrafico(dados);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+
+}
+
+obterDadosGrafico();
+
+//     // só altere aqui se souber o que está fazendo!
+function plotarGrafico(dados) {
+    console.log('iniciando plotagem do gráfico...');
+
+    var ctxGrafico = canvas_grafico.getContext('2d');
+    window.grafico_linha = Chart.Line(ctxGrafico, {
+        data: dados,
+        options: configurarGrafico()
+    });
+
+    setTimeout(atualizarGrafico, 5000);
+}
+//
+</script>
+
+
+<!-- biblioteca dos icones -->
+<script src="https://kit.fontawesome.com/f3846a3688.js"></script>
+
+<!-- importando a biblioteca dos graficos -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+//     var ctx2 = document.getElementById('grafic2').getContext('2d');
+//     var ctx3 = document.getElementById('grafic3').getContext('2d');
+
+//     // gráfico pizza 1
+//     var myPieChart1 = new Chart(ctx2, {
+//         type: 'pie',
+//         data: {
+//             labels: ['Dia 1', 'Dia 2'],
+//             datasets: [{
+//                 backgroundColor: [
+//                     'rgb(2, 145, 177)',
+//                     'rgb(26, 187, 223)'
+//                 ],
+
+//                 data: ['75', '25']
+//             }]
+//         },
+
+//         options: {
+//             responsive: true,
+//         }
+//     })
+
+//     // gráfico pizza 2
+//     var myPieChart2 = new Chart(ctx3, {
+//         type: 'pie',
+//         data: {
+//             labels: ['Semana 1', 'Semana 2'],
+//             datasets: [{
+//                 backgroundColor: [
+//                     'rgb(2, 145, 177)',
+//                     'rgb(26, 187, 223)'
+//                 ],
+
+//                 data: ['58', '48']
+//             }]
+//         },
+
+//         options: {
+//             responsive: true,
+//         }
+//     })
+</script>

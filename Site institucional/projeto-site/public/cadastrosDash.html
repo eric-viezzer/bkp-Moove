@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="shortcut icon" href="src/img/icon-moove.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <title> Dashboard </title>
+</head>
+
+<body onload="onLoadCadastros()">
+
+    <!-- INICIO DO HEADER-->
+    <header>
+        <div class="container">
+            <nav>
+                <img src="src/img/icon-moove2.png" onclick="window.location.href='index.html'" alt=""
+                    class="icon-header">
+                <div class="dash-header">
+                    <a href="logout.html"><img src="src/img/sair.png">
+                        <h1>Sair</h1>
+                    </a>
+            </nav>
+        </div>
+        </div>
+    </header>
+    <!-- FIM DO HEADER-->
+
+
+    <!-- DASHBOARD -->
+    <div class="dash-geral">
+        <div class="dash-menuesquerda">
+            <div class="dash-nomemenu">
+
+                <h1 id="nometrans">Nome <br> Transportadora</h1>
+            </div>
+            <div class="dash-iconsmenu">
+                <div class="iconsmenu">
+                    <a href="dashboard.html"><img src="src/img/casa.png">
+                        <h1> Início </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="perfil.html"><img src="src/img/do-utilizador.png">
+                        <h1> Perfil </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="cadastrosDash.html"><img src="src/img/informacoes.png">
+                        <h1 class="destaque-dash"> Cadastros </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="monitoramento.html"> <img src="src/img/chart.png">
+                        <h1> Monitoramento </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="avaliacaoDash.html"> <img src="src/img/estrela.png">
+                        <h1> Avaliações </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="https://movesense.atlassian.net/servicedesk/customer/portal/3"> <img src="src/img/botao-de-duvidas.png">
+                        <h1> Ajuda </h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="dash-menudireita">
+            <h2> CADASTROS </h2>
+
+            <div id="div_cadastros" class="cadastros-dash">
+
+                <!-- <div class="cadastros">
+                    <p id="linhacor"> Linha 1 </p> <img src="src/img/triangulo.png" alt="" id="triangulo">
+                </div>
+                <div class="item-cadastro" id="conteudo_linha1>
+                    <div class="container">
+                        <div class="item-linha">
+                            <div class="text-informacao"><span class="topico-cadastro">Comprimento:</span> <span>35km</span></div>
+                        </div>
+                        <div class="item-linha">
+                            <div class="text-informacao"><span class="topico-cadastro">Início:</span> <span>Rua Rio de Janeiro</span></div>
+                            <div class="text-informacao"><span class="topico-cadastro">Final:</span> <span>Rua dos Castores</span></div>
+                        </div>
+                        <div class="botao-editar"><a href="">Editar</a></div>
+                    </div>
+                </div> -->
+
+                <!-- <div class="cadastros linha-2" onclick="aparece_desaparece('none', 'block', 'none', 'none')">
+                    <p id="linhacor2"> Linha 2 </p> <img src="src/img/triangulo.png" alt="" id="triangulo">
+                </div>
+
+                <div class="item-cadastro" id="conteudo_linha2" style="display: none;">
+                    <div class="container">
+                        <div class="box-linha-2">
+                            <div class="item-linha">
+                                <div class="text-informacao"><span class="topico-cadastro">Comprimento:</span> 42km
+                                </div>
+                            </div>
+                            <div class="item-linha">
+                                <div class="text-informacao"><span class="topico-cadastro">Início:</span> Rua Eric
+                                    Cabral</div>
+                                <div class="text-informacao"><span class="topico-cadastro">Final:</span> Av. Mariana
+                                    Viezzer</div>
+                            </div>
+                        </div>
+                        <div class="botao-editar"><a href="">Editar</a></div>
+                    </div>
+                </div>
+
+
+
+                <div class="cadastros linha-3" onclick="aparece_desaparece('none', 'none', 'block', 'none')">
+                    <p id="linhacor3"> Linha 3 </p> <img src="src/img/triangulo.png" alt="" id="triangulo">
+                </div>
+
+                <div class="item-cadastro" id="conteudo_linha3" style="display: none;">
+                    <div class="container">
+                        <div class="box-linha-3">
+                            <div class="item-linha">
+                                <div class="text-informacao"><span class="topico-cadastro">Comprimento:</span> 40km
+                                </div>
+                            </div>
+                            <div class="item-linha">
+                                <div class="text-informacao"><span class="topico-cadastro">Início:</span> Rua Luga</div>
+                                <div class="text-informacao"><span class="topico-cadastro">Final:</span> Rua Palestina
+                                </div>
+                            </div>
+                        </div>
+                        <div class="botao-editar"><a href="">Editar</a></div>
+                    </div>
+                </div>
+
+                <div class="cadastros linha-4" onclick="aparece_desaparece('none', 'none', 'none', 'block')">
+                    <p id="linhacor4"> Linha 4 </p> <img src="src/img/triangulo.png" alt="" id="triangulo">
+                </div>
+
+                <div class="item-cadastro" id="conteudo_linha4" style="display: none;">
+                    <div class="container">
+                        <div class="box-linha-4">
+                            <div class="item-linha">
+                                <div class="text-informacao"><span class="topico-cadastro">Comprimento:</span> 44km
+                                </div>
+                            </div>
+                            <div class="item-linha">
+                                <div class="text-informacao"><span class="topico-cadastro">Início:</span> Av. Rio de
+                                    Janeiro</div>
+                                <div class="text-informacao"><span class="topico-cadastro">Final:</span> Rua Santana
+                                </div>
+                            </div>
+                        </div>
+                        <div class="botao-editar"><a href="">Editar</a></div>
+                    </div>
+                </div>  -->
+
+            </div>
+        </div>
+    </div>
+</body>
+<!-- FIM DA DASHBOARD-->
+
+</html>
+<script src="https://kit.fontawesome.com/f3846a3688.js">
+</script>
+<script>
+    // verificar_autenticacao2();
+
+    let id = sessionStorage.idTrans
+
+    // function aparece_desaparece(f1, f2, f3, f4) {
+
+    //     conteudo_linha1.style.display = f1;
+    //     conteudo_linha2.style.display = f2;
+    //     conteudo_linha3.style.display = f3;
+    //     conteudo_linha4.style.display = f4;
+    // }
+
+    function onLoadCadastros() {
+        fetch(`/usuarios/resgatarLinhas/${id}`, {
+            method: "GET"
+        }).then(resposta => {
+
+            if (resposta.ok) {
+
+                resposta.json().then(json => {
+
+                    for (n = 0; n < json.length; n++) {
+                        div_cadastros.innerHTML += `<div class="cadastros">
+                    <p id="linhacor"> Linha ${json[n].numLinha} </p> <img src="src/img/triangulo.png" alt="" id="triangulo">
+                </div>
+                <div class="item-cadastro" id="conteudo_linha1>
+                    <div class="container">
+                        <div class="item-linha">
+                            <div class="text-informacao"><span class="topico-cadastro">Comprimento:</span> <span>${json[n].comprimentoLinha}Km</span></div>
+                        </div>
+                        <div class="item-linha">
+                            <div class="text-informacao"><span class="topico-cadastro">Início:</span> <span>${json[n].inicioLinha}</span></div>
+                            <div class="text-informacao"><span class="topico-cadastro">Final:</span> <span>${json[n].finalLinha}</span></div>
+                        </div>
+                        <div class="botao-editar"><a href="">Editar</a></div>
+                    </div>
+                </div>`;
+                        // console.log(json.comentarioAvaliacao)
+                    }
+
+                    
+
+                })
+
+            } else {
+
+                alert("Nenhuma avaliação encontrada")
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                    console.log(resposta);
+                });
+            }
+        });
+    }
+</script>

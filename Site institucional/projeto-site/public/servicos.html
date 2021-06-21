@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="noOver" lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/css/style.css" />
+    <!--ICONE ABA-->
+    <link rel="shortcut icon" href="src/img/icon-moove.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Moove - Home Page</title>
+</head>
+
+<body>
+    <!-- INICIO DO HEADER-->
+    <header>
+        <div class="container">
+            <nav>
+                <img src="src/img/icon-moove2.png" onclick="window.location.href='index.html'" alt="" class="icon-header">
+                <ul class="middle">
+                    <li>
+                        <a href="index.html"><img src="src/img/home.png" class="icon"></a>
+                        <a class="texto" href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="sobre.html"><img src="src/img/search.png" class="icon"></a>
+                        <a class="texto" href="sobre.html">Sobre</a>
+                    </li>
+                    <li>
+                        <a href="servicos.html"><img src="src/img/tools.png" class="icon"></a>
+                        <a class="current texto" href="servicos.html">Serviços</a>
+                    </li>
+                    <li>
+                        <a href="avaliacao.html"><img src="src/img/avaliacao (1).png" class="icon"></a>
+                        <a class="texto" href="avaliacao2.html">Avaliação</a>
+                    </li>
+                    <li>
+                        <a href="login.html" class="login texto">Login</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>  
+    </header>
+    <!-- FIM DO HEADER-->
+    <div class="servicos-geral">
+    <div class="img-servicos">
+        <img src="src/img/img-services.jpg" alt="">
+            <div class="texto-img-servicos">
+            <h2>Serviços</h2>
+            <p>Saiba mais sobre o que oferecemos!</p>
+    </div>
+    </div>
+    
+    <div class="box-servicos">
+        <div class="text-box">
+            <div class="icone-servicos">
+                <img src="src/img/objetivo.png" alt="">
+            </div>
+            <h2>Desenvolvimento</h2>
+            <span>Nós criamos uma calculadora financeira que faz o cálculo da quantia de dinheiro que seria economizada caso o cliente adote a nossa solução. O cálculo se baseia em gasto em combustível e a manutenação dos veículos. O nosso produto disponibiliza informações que complementam esse conhecimento e que geram uma redução nesse gasto, por gerar um gasto mais inteligente.</span>
+            </div>
+        <div class="text-box">
+            <div class="icone-servicos">
+                <img src="src/img/inovacao.png" alt="">
+            </div>
+            <h2>Inovação</h2>
+            <span>Nós criamos uma nova forma de compreender e recolher os dados do fluxo das pessoas, facilitando o trabalho das transportadoras e diminuindo a margem de erro. Nós proporcionamos uma analise personalizada para cada cliente, onde ele decide o que ele quer monitorar e uma alta precisão desses dados recolhidos.</span>
+        </div>
+        <div class="text-box">
+            <div class="icone-servicos">
+                <img src="src/img/interatividade.png" alt="">
+            </div>
+            <h2>Interatividade</h2>
+            <span>Nós sabemos da importância do passageiro, por isso além de recolher os dados do fluxo, buscamos também da opinião dos usuários dos transportes públicos. Nós criamos uma interação com o público, para que nossos dados fiquem mais precisos e que a transportadora esteja ciente de todos os aspectos do seu produto.</span>
+        </div>
+    </div>
+    
+    <div class="servicos-simulador">
+    <div class="servicos-calculadora">
+        <h2>Simulador Financeiro</h2>
+                <p>Digite o número da linha:</p>
+                <input type="text" id="numLinha" class="input-simuladorFin"><br>
+                <p>Digite quantos Km tem esta linha:</p>
+                <input type="text" id="kmLinha" class="input-simuladorFin"><br>
+                <p>Digite quantas viagens faz por dia nesta linha:</p>
+                <input type="text" id="viagemDia" class="input-simuladorFin"><br>
+                <p>Digite quantos Km esta linha anda com poucos passageiros:</p>
+                <input type="text" id="kmVazio" class="input-simuladorFin"><br>
+
+                <button onclick="calc()" class="botaoSimu">Calcular</button>
+    </div>
+
+    <div class="servicos-resultado">
+        <h2>Gastos</h2>
+        <p class="gastosSimu">Na linha <b id="bLinha" class="gastosSimu">0</b>, por dia você acaba gastando
+            por dia</p>
+        <span class="span-res" id="span_res1">00,00</span>
+        <p class="gastosSimu">E por mês</p>
+        <span class="span-res" id="span_res2">00,00</span>
+        <p class="gastosSimu">E conosco você iria economizar</p>
+        <span class="span-res" id="span_res3">00,00</span>
+    </div>
+    </div>
+    </div>
+
+       <!--RODAPÉ-->
+       <div class="rodape">
+        <div>
+            <img src="src/img/icon-moove2.png" alt="">
+        </div>
+        <div class="lista-rodape">
+            <h2>Contato</h2>
+            <br>
+            <img src="src/img/email (1).png"> suporte@movesense.atlasian.net <br><br>
+            <img src="src/img/instagram.png"> @moovebr <br><br>
+            <img src="src/img/place.png"> <a href="https://www.google.com.br/maps/place/Bandtec+Digital+School/@-23.5581213,-46.6638081,17z/data=!3m1!4b1!4m5!3m4!1s0x94ce59d2b063f663:0xc567c0d16d0bc582!8m2!3d-23.5581213!4d-46.661614"> Rua Haddock Lobo, 595 <br>
+            São Paulo, SP</a>
+        </div>
+        <div class="lista-rodape2">
+            <h2 >Empresa</h2>
+            <br>
+            <a href="sobre.html"> Sobre </a><br>
+            <a href="servicos.html"> Serviços</a> <br>
+            <a href="avaliacao.html"> Avaliações</a> 
+        </div>
+
+        <div class="lista-rodape2">
+            <h2>Login</h2>
+            <br>
+            <a href="login.html">Dashboard </a><br>
+        </div>
+
+        <div id="copyright">
+            <img src="src/img/copyright (1).png" id="img-copyright"> Moove 2020
+        </div>
+    </div>
+<!-- FIM RODAPÉ -->
+</body>
+
+</html>
+
+
+<!-- JS -->
+<script src="https://kit.fontawesome.com/f3846a3688.js"></script>
+
+<script>
+    function calc() {
+        var diesel = 3.551;
+        var valor_numLinha = Number(numLinha.value);
+        var valor_kmLinha = Number(kmLinha.value);
+        var valor_kmVazio = Number(kmVazio.value);
+        var valor_viagemDia = Number(viagemDia.value);
+        var dieselDia = 0;
+        var dieselMes = 0;
+        var gasto = 0;
+
+        //calculo
+        dieselDia = (valor_kmLinha * diesel) * valor_viagemDia;
+        dieselMes = dieselDia * 30;
+
+        gasto = ((valor_kmVazio * diesel) * valor_viagemDia) * 30;
+
+        bLinha.innerHTML = valor_numLinha;
+        span_res1.innerHTML = 'R$' + dieselDia.toFixed(2);
+        span_res2.innerHTML = 'R$' + dieselMes.toFixed(2);
+        span_res3.innerHTML = 'R$' + gasto.toFixed(2);
+    }
+</script>

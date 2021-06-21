@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://www.chartjs.org/samples/latest/charts/pie.html -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Pie Chart</title>
+    <script async="" src="./Pie Chart_files/analytics.js"></script>
+    <script src="./Pie Chart_files/Chart.min.js"></script>
+    <script src="./Pie Chart_files/utils.js"></script>
+    <style type="text/css">
+        /* Chart.js */
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: .99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            animation: chartjs-render-animation 1ms
+        }
+
+        .chartjs-size-monitor,
+        .chartjs-size-monitor-expand,
+        .chartjs-size-monitor-shrink {
+            position: absolute;
+            direction: ltr;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: -1
+        }
+
+        .chartjs-size-monitor-expand>div {
+            position: absolute;
+            width: 1000000px;
+            height: 1000000px;
+            left: 0;
+            top: 0
+        }
+
+        .chartjs-size-monitor-shrink>div {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: 0;
+            top: 0
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: flex;">
+        <div id="canvas-holder" style="width:40%;">
+            <div class="chartjs-size-monitor">
+                <div class="chartjs-size-monitor-expand">
+                    <div class=""></div>
+                </div>
+                <div class="chartjs-size-monitor-shrink">
+                    <div class=""></div>
+                </div>
+            </div>
+            <canvas id="chart-area1" style="display: block; width: 540px; height: 270px;" width="540" height="270"
+                class="chartjs-render-monitor"></canvas>
+        </div>
+    
+        <div id="canvas-holder" style="width:40%;">
+            <div class="chartjs-size-monitor">
+                <div class="chartjs-size-monitor-expand">
+                    <div class=""></div>
+                </div>
+                <div class="chartjs-size-monitor-shrink">
+                    <div class=""></div>
+                </div>
+            </div>
+            <canvas id="chart-area2" style="display: block; width: 540px; height: 270px;" width="540" height="270"
+                class="chartjs-render-monitor"></canvas>
+        </div>
+    </div>
+    
+    <script>
+
+
+        let id = sessionStorage.idTrans
+
+        function resgataJSONTopico() {
+            fetch(`/avaliacao/graficoAvaliacaoTopico/${id}`, {
+                method: "GET"
+            }).then(resposta => {
+
+                if (resposta.ok) {
+
+                    resposta.json().then(json => {
+
+                        for(n = 0; n < json.length; n++){
+                            // console.log(json[n].contador)
+                            plotarGraficoTopico(json[n].contador)
+                            console.log(json[n].contador)
+                        }
+
+                    })
+
+                } else {
+
+                    alert("Nenhuma avaliação encontrada")
+                    console.log('Erro de cadastro!');
+                    response.text().then(function (resposta) {
+                        console.log(resposta);
+                    });
+                }
+            });
+        }
+
+        resgataJSONTopico();
+
+        function resgataJSONLinha() {
+            fetch(`/avaliacao/graficoAvaliacaoLinha/${id}`, {
+                method: "GET"
+            }).then(resposta => {
+
+                if (resposta.ok) {
+
+                    resposta.json().then(json => {
+
+                        for(n = 0; n < json.length; n++){
+                            // console.log(json[n].contador)
+                            plotarGraficoLinha(json[n].contador, json[n].numLinha)
+                            console.log(json[n].contador)
+                        }
+
+                    })
+
+                } else {
+
+                    alert("Nenhuma avaliação encontrada")
+                    console.log('Erro de cadastro!');
+                    response.text().then(function (resposta) {
+                        console.log(resposta);
+                    });
+                }
+            });
+        }
+
+        resgataJSONLinha();
+
+        var configTopico = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [
+                        
+                    ],
+                    backgroundColor: [
+                        window.chartColors.red,
+                        window.chartColors.orange,
+                        window.chartColors.yellow,
+                        window.chartColors.green,
+                        window.chartColors.blue,
+                        window.chartColors.purple
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: [
+                    'Infra pontos','Cumprimento dos horários','Segurança','Infra Onibus','Conduta dos Funcionários','Outra'
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        };
+
+        var configLinha = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [
+                        
+                    ],
+                    backgroundColor: [
+                        window.chartColors.red,
+                        window.chartColors.orange,
+                        window.chartColors.yellow,
+                        window.chartColors.green,
+                        window.chartColors.blue,
+                        window.chartColors.purple
+                    ],
+                    label: 'Dataset 2'
+                }],
+                labels: [
+                    
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        };
+
+        window.onload = function () {
+
+            // PARTE QUE É OS BAGULHO DO GRÁFICO
+            var ctx = document.getElementById('chart-area1').getContext('2d');
+            grafico1 = new Chart(ctx, configTopico);
+
+            var ctx2 = document.getElementById('chart-area2').getContext('2d');
+            grafico2 = new Chart(ctx2, configLinha);
+
+        };
+
+        function plotarGraficoTopico(dado){
+            configTopico.data.datasets.forEach(function (dataset) {
+                dataset.data.push(dado)
+            });
+            grafico1.update();
+
+        }
+        function plotarGraficoLinha(dado, label){
+            configLinha.data.datasets.forEach(function (dataset) {
+                dataset.data.push(dado)
+                
+            });
+            configLinha.data.labels.push(label)
+            grafico2.update();
+
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>

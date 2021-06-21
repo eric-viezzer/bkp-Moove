@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="shortcut icon" href="src/img/icon-moove.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <title> Dashboard </title>
+</head>
+
+<body onload="onLoadPerfil()">
+
+    <!-- INICIO DO HEADER-->
+    <header>
+        <div class="container">
+            <nav>
+                <img src="src/img/icon-moove2.png" onclick="window.location.href='index.html'" alt=""
+                    class="icon-header">
+                <div class="dash-header">
+                    <a href="logout.html"><img src="src/img/sair.png">
+                        <h1>Sair</h1>
+                    </a>
+            </nav>
+        </div>
+        </div>
+    </header>
+    <!-- FIM DO HEADER-->
+
+
+    <!-- DASHBOARD -->
+    <div class="dash-geral">
+        <div class="dash-menuesquerda">
+            <div class="dash-nomemenu">
+
+                <h1 id="nometrans">Nome <br> Transportadora</h1>
+            </div>
+            <div class="dash-iconsmenu">
+                <div class="iconsmenu">
+                    <a href="dashboard.html"><img src="src/img/casa.png">
+                        <h1> Início </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="perfil.html"><img src="src/img/do-utilizador.png">
+                        <h1 class="destaque-dash"> Perfil </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="cadastrosDash.html"><img src="src/img/informacoes.png">
+                        <h1> Cadastros </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="monitoramento.html"> <img src="src/img/chart.png">
+                        <h1> Monitoramento </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="avaliacaoDash.html"> <img src="src/img/estrela.png">
+                        <h1> Avaliações </h1>
+                    </a>
+                </div>
+                <div class="iconsmenu">
+                    <a href="https://movesense.atlassian.net/servicedesk/customer/portal/3"> <img src="src/img/botao-de-duvidas.png">
+                        <h1> Ajuda </h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="dash-menudireita">
+            <div class="perfil-geral">
+                <div class="titulo-perfil">
+                    <img src="./src/img/do-utilizador.png" alt="">
+                    <h1>Perfil</h1>
+                </div>
+                <div class="inputs-perfil">
+                    <div class="caixa-input-perfil">
+                        <div class="caixa-esquerda-input">
+                            <h1>Nome:</h1>
+                        </div>
+                        <div class="caixa-direita-input">
+                            <h1 id="h1_nome"></h1>
+                            <!-- <input disabled id="h1_nome" type="text" placeholder=""> -->
+                        </div>
+                    </div>
+                    <div class="caixa-input-perfil">
+                        <div class="caixa-esquerda-input">
+                            <h1>E-mail:</h1>
+                        </div>
+                        <div class="caixa-direita-input">
+                            <h1 id="h1_email"></h1>
+                        </div>
+                    </div>
+                    <div class="caixa-input-perfil">
+                        <div class="caixa-esquerda-input">
+                            <h1 >CPNJ:</h1>
+                        </div>
+                        <div class="caixa-direita-input">
+                            <h1 id="h1_cnpj"></h1>
+                        </div>
+                    </div>
+                    <div class="caixa-input-perfil">
+                        <div class="caixa-esquerda-input">
+                            <h1>Telefone:</h1>
+                        </div>
+                        <div class="caixa-direita-input">
+                            <h1 id="h1_telefone1"></h1>
+                        </div>
+                    </div>
+                    <div class="caixa-input-perfil">
+                        <div class="caixa-esquerda-input">
+                            <h1>Telefone 2:</h1>
+                        </div>
+                        <div class="caixa-direita-input">
+                            <h1 id="h1_telefone2"></h1>
+                        </div>
+                    </div>
+                    <div class="caixa-select-perfil">
+                        <div class="select-perfil">
+                            <div class="caixa-esquerda-select">
+                                <h1>Estado:</h1>
+                            </div>
+                            <div class="caixa-direita-select">
+                                <!-- <select name="" id="">
+                                    <option value="">SP</option>
+                                    <option value=""></option>
+                                    <option value=""></option>
+                                </select> -->
+                                <h1 id="h1_estado"></h1>
+                            </div>
+                        </div>
+                        <div class="select-perfil">
+                            <div class="caixa-esquerda-select">
+                                <h1>Cidade:</h1>
+                            </div>
+                            <div class="caixa-direita-select">
+                                <!-- <select name="" id="">
+                                    <option value="">São Paulo</option>
+                                    <option value=""></option>
+                                    <option value=""></option>
+                                </select> -->
+                                <h1 id="h1_cidade"></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="caixa-input-perfil">
+                        <div class="caixa-esquerda-input">
+                            <h1>Senha:</h1>
+                        </div>
+                        <div class="caixa-direita-input">
+                            <h1>Oculta</h1>
+                        </div>
+                    </div>
+                    <!-- <div class="caixa-input-perfil">
+                        <div class="caixa-esquerda-input">
+                            <h1>Confirma senha:</h1>
+                        </div>
+                        <div class="caixa-direita-input">
+                            <h1>*********</h1>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="botao-perfil">
+                    <button>Editar</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</body>
+<!-- FIM DA DASHBOARD-->
+
+</html>
+
+<script src="https://kit.fontawesome.com/f3846a3688.js"></script>
+
+<script>
+    let id = sessionStorage.idTrans
+
+    function onLoadPerfil() {
+        fetch(`/avaliacao/inserirLinhas/${id}`, {
+            method: "GET"
+        }).then(resposta => {
+
+            if (resposta.ok) {
+
+                resposta.json().then(json => {
+
+                    if (id == json[0].idTrans) {
+                        h1_nome.innerHTML = json[0].nomeTrans;
+                        h1_email.innerHTML = json[0].emailTrans;
+                        h1_cnpj.innerHTML = json[0].cnpjTrans;
+                        h1_telefone1.innerHTML = json[0].telefone1Trans;
+                        h1_telefone2.innerHTML = json[0].telefone2Trans;
+                        h1_estado.innerHTML = json[0].estadosTrans;
+                        h1_cidade.innerHTML = json[0].cidadesTrans;
+                        // h1_senha.innerHTML = json[0].senhaTrans;
+                    }
+
+                    // else if (id == 2) {
+                    //     for (n = 0; n < json.length; n++) {
+                    //         div_linhas.innerHTML += `<div onclick="desaparecer(), recebeLinha(${json[n].numLinha})" class="linhas">
+                    //                     <p> Linha ${json[n].numLinha} </p>
+                    //                 </div>`
+                    //         // console.log(`Sessão ${n}:` + json[n])
+                    //     }
+                    // }
+
+                })
+
+            } else {
+
+                alert("Nenhuma avaliação encontrada")
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                    console.log(resposta);
+                });
+            }
+        });
+    }
+</script>

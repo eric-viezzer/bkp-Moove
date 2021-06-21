@@ -1,0 +1,5 @@
+<mysql.connector.connection.MySQLConnection object at 0x000001BAD42667F0>
+{'cpu': 6.2, 'memory': 6, 'disk': 7.2, 'cpu_idle': 61.682573784722216, 'memory_percent': 61.2}
+Inserindo Valores
+{'cpu': 7.9, 'memory': 6, 'disk': 7.2, 'cpu_idle': 61.69529513888888, 'memory_percent': 61.1}
+Inserindo Valores
